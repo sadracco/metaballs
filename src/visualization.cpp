@@ -1,11 +1,13 @@
-#include <SDL2/SDL.h>
 #include <string>
 #include <iostream>
 #include <array>
 #include <time.h>
-#include "ball.cpp"
 #include <math.h>
-using namespace std;
+
+#include <SDL2/SDL.h>
+
+#include "ball.cpp"
+
 
 class Vis{
     private:
@@ -21,9 +23,7 @@ class Vis{
         int wY;
 
         double surf[h][w] = {0};
-
         Ball balls[7];
-
         bool isOn;
 
         void run(){
@@ -58,10 +58,8 @@ class Vis{
         }
 
         void update(){
-            double v;
-            double s;
-            double dx, dy;
-            for(int y=0; y<h; y++){
+            double v, s, dx, dy;
+            for(int y=0; y<h; y++)
                 for(int x=0; x<w; x++){
                     s = 0;
                     for(auto b : balls){
@@ -72,7 +70,6 @@ class Vis{
                     }
                     surf[y][x] = fallback(s);
                 }
-            }
 
             for(int i=0; i<sizeof(balls)/sizeof(Ball)-1; i++)
                 balls[i].move(w, h);
@@ -91,12 +88,11 @@ class Vis{
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
             SDL_RenderClear(renderer);
 
-            for(int y=0; y<h; y++){
+            for(int y=0; y<h; y++)
                 for(int x=0; x<w; x++){
                     color(surf[y][x]);
                     SDL_RenderDrawPoint(renderer, x, y);
                 }
-            }
 
             SDL_RenderPresent(renderer);
         }
@@ -111,8 +107,10 @@ class Vis{
             window = SDL_CreateWindow(name.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, SDL_WINDOW_SHOWN);
             renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
             SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
+
             isOn = true;
             run();
+
             SDL_Quit();
         }
 };

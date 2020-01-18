@@ -1,12 +1,10 @@
-#include <iostream>
-using namespace std;
-
 class Ball{
     public:
         double x,y,r;
         int sx, sy;
 
         Ball(){ }
+
         Ball(double xx,double yy,double rr, int ssx, int ssy){
             x = xx;
             y = yy;
