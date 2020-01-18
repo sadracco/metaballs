@@ -1,6 +1,10 @@
 CC=g++
 LFLAGS=-lSDL2
 CFLAGS=-std=c++17
+
 EXE=metaballs
+
+SRC=src
+
 all:
-	$(CC) *.cpp -o $(EXE) $(LFLAGS) $(CFLAGS)
+	$(CC) $(SRC)/*.cpp -o $(EXE) $(LFLAGS) $(CFLAGS)
